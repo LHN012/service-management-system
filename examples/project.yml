@@ -1,0 +1,41 @@
+code: demo
+name: Demo
+manageMode: external
+description: Example Java backend and web package deployment
+
+backends:
+  - name: api
+    runtime: java
+    workDir: /opt/demo/backend
+    startCommand: java -jar demo-api.jar --server.port=8080
+    stopMode: graceful
+    stopTimeout: 15
+    expectedPorts: [8080]
+    healthCheck: http://127.0.0.1:8080/actuator/health
+    match:
+      commandContains: demo-api.jar
+      cwd: /opt/demo/backend
+
+frontends:
+  - name: web
+    nginxMode: shared
+    rootDir: /usr/share/nginx/html/demo
+    nginxConf: /etc/nginx/conf.d/demo.conf
+    reloadCommand: nginx -s reload
+    expectedPorts: [80]
+
+deployRules:
+  - name: api-jar
+    source: deploy-files/demo-api.jar
+    targetDir: /opt/demo/backend
+    targetName: demo-api.jar
+    type: file
+    backup: true
+  - name: web-package
+    source: deploy-files/web-dist.zip
+    targetDir: /usr/share/nginx/html/demo
+    type: archive
+    archiveFormat: auto
+    stripTopLevel: auto
+    replaceMode: entries
+    backup: true

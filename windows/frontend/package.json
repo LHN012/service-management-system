@@ -1,0 +1,24 @@
+{
+  "name": "service-management-system-windows-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "lint": "eslint src --ext js,jsx --max-warnings 0"
+  },
+  "dependencies": {
+    "lucide-react": "0.468.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.4",
+    "eslint": "8.57.1",
+    "eslint-plugin-react": "7.37.3",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "vite": "4.5.14"
+  }
+}
