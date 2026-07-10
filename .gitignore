@@ -1,0 +1,45 @@
+# Runtime data and local configuration
+/conf/
+/data/
+/projects/
+/templates/
+/tmp/
+*.log
+
+# Build outputs and release archives
+/bin/
+/release/
+/windows/build/bin/
+/windows/frontend/dist/
+
+# Frontend dependencies and generated bindings
+/windows/frontend/node_modules/
+/windows/frontend/wailsjs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Go build and test artifacts
+*.test
+*.out
+*.prof
+coverage.*
+/vendor/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
