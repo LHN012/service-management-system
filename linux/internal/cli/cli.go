@@ -9,13 +9,13 @@ import (
 	"strings"
 	"time"
 
-	"sms/internal/agent"
 	"sms/internal/config"
 	"sms/internal/deploy"
 	"sms/internal/service"
-	"sms/internal/setup"
 	"sms/internal/store"
 	"sms/internal/system"
+	"sms/linux/internal/agent"
+	"sms/linux/internal/setup"
 )
 
 const Version = "0.1.0"

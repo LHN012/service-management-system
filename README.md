@@ -31,19 +31,22 @@ Service Management System 是一个面向单机环境的项目、进程和部署
 
 ```text
 service-management-system/
-  cmd/sms/                    Linux CLI 入口
-  internal/                   配置、进程、部署和存储等公共逻辑
-  windows/                    Windows Wails 应用
+  linux/                      Linux CLI 与独立 Agent
+    cmd/sms/                  程序入口
+    internal/                 CLI、Agent 和初始化逻辑
+    build.sh                  Linux amd64 构建脚本
+    init                      初始化入口
+    sms                       命令入口
+  windows/                    Windows Wails 桌面应用
     frontend/                 React 前端
+    build.ps1                 Windows amd64 构建脚本
+  internal/                   两个平台共用的 Go 能力
   docs/                       Linux 与 Windows 产品文档
   examples/project.yml        项目配置示例
-  init                        Linux 初始化脚本
-  sms                         Linux 命令入口脚本
-  build.sh                    Linux amd64 构建脚本
-  build-windows.ps1           Windows amd64 构建脚本
+  release/                    本地发布包（不提交）
 ```
 
-`bin/`、`release/`、运行数据、前端依赖和前端构建结果均为本地生成内容，不提交到源码仓库。
+`linux/bin/`、`windows/bin/`、`release/`、运行数据、前端依赖和前端构建结果均为本地生成内容，不提交到源码仓库。
 
 ## Linux 快速开始
 
@@ -59,14 +62,14 @@ service-management-system/
 ```bash
 git clone https://github.com/LHN012/service-management-system.git
 cd service-management-system
-./build.sh
-./init
+./linux/build.sh
+./linux/init
 ```
 
 初始化后的运行目录如下：
 
 ```text
-service-management-system/
+service-management-system/linux/
   conf/                       应用配置
   projects/                   项目配置与项目数据
     <project>/
@@ -86,12 +89,12 @@ service-management-system/
 启动 Agent 并进入交互式 Shell：
 
 ```bash
-./sms start
-./sms status
-./sms enter
+./linux/sms start
+./linux/sms status
+./linux/sms enter
 ```
 
-`./sms stop` 只停止管理 Agent，不会停止已经启动的业务进程。重新启动 Agent 后会根据项目配置和系统进程重新构建运行状态。
+`./linux/sms stop` 只停止管理 Agent，不会停止已经启动的业务进程。重新启动 Agent 后会根据项目配置和系统进程重新构建运行状态。
 
 ### Linux 常用命令
 
@@ -116,7 +119,7 @@ pr -s                        立即重建全部项目状态
 dp <项目> [规则名]            预览并确认部署迁移
 ```
 
-命令既可以作为 `./sms <命令>` 直接执行，也可以在 `./sms enter` 的交互环境中执行。
+命令既可以作为 `./linux/sms <命令>` 直接执行，也可以在 `./linux/sms enter` 的交互环境中执行。
 
 ## Windows 快速开始
 
@@ -131,8 +134,8 @@ dp <项目> [规则名]            预览并确认部署迁移
 ```powershell
 git clone https://github.com/LHN012/service-management-system.git
 Set-Location service-management-system
-.\build-windows.ps1
-.\bin\service-management-system-windows.exe
+.\windows\build.ps1
+.\windows\bin\service-management-system-windows.exe
 ```
 
 首次启动会在以下位置创建运行数据：
@@ -206,8 +209,8 @@ deployRules:
 运行 Go 测试和静态检查：
 
 ```bash
-go test ./...
-go vet ./...
+go test ./linux/... ./internal/... ./windows
+go vet ./linux/... ./internal/... ./windows
 ```
 
 运行 Windows 前端检查和构建：
@@ -222,16 +225,16 @@ npm run build
 构建 Linux amd64 可执行文件：
 
 ```bash
-./build.sh
+./linux/build.sh
 ```
 
 构建 Windows amd64 桌面应用：
 
 ```powershell
-.\build-windows.ps1
+.\windows\build.ps1
 ```
 
-生成结果位于 `bin/`。
+生成结果分别位于 `linux/bin/` 和 `windows/bin/`。
 
 ## 当前限制
 

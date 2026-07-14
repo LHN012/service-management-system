@@ -4,11 +4,20 @@
 /projects/
 /templates/
 /tmp/
+/linux/conf/
+/linux/data/
+/linux/projects/
+/linux/templates/
+/linux/tmp/
+/sms-linux/projects/
 *.log
 
 # Build outputs and release archives
 /bin/
+/linux/bin/
+/sms-linux/bin/
 /release/
+/windows/bin/
 /windows/build/bin/
 /windows/frontend/dist/
 

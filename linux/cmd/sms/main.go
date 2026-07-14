@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"sms/internal/cli"
+	"sms/linux/internal/cli"
 )
 
 func main() {

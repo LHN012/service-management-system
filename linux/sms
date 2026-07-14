@@ -5,9 +5,9 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 BIN="$ROOT/bin/sms-core"
 
 if [ ! -f "$BIN" ]; then
-  echo "sms-core is missing. Run ./build.sh on a machine with Go 1.23+." >&2
+  echo "sms-core is missing. Run ./build.sh on a machine with Go 1.25+." >&2
   exit 1
 fi
 
 chmod +x "$BIN"
-exec "$BIN" --root "$ROOT" init
+exec "$BIN" --root "$ROOT" "$@"
