@@ -1,0 +1,16 @@
+# Local runtime data
+/conf/
+/data/
+/projects/
+/templates/
+/tmp/
+
+# Build outputs
+/bin/
+/build/bin/
+/release/
+/frontend/dist/
+
+# Frontend dependencies and generated bindings
+/frontend/node_modules/
+/frontend/wailsjs/

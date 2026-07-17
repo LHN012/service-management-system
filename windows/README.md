@@ -42,14 +42,15 @@ C:\ProgramData\ServiceManagementSystem\
 需要 Go 1.25+、Node.js 18+ 和 WebView2 Runtime：
 
 ```powershell
-.\windows\build.ps1
-.\windows\bin\service-management-system-windows.exe
+Set-Location windows
+.\build.ps1
+.\bin\service-management-system-windows.exe
 ```
 
 开发界面：
 
 ```powershell
-cd windows\frontend
+Set-Location windows\frontend
 npm install
 npm run dev
 ```

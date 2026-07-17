@@ -1,7 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
 $WindowsRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = Split-Path -Parent $WindowsRoot
 $Frontend = Join-Path $WindowsRoot 'frontend'
 $Output = Join-Path $WindowsRoot 'bin\service-management-system-windows.exe'
 
@@ -24,12 +23,12 @@ finally {
     Pop-Location
 }
 
-Push-Location $RepoRoot
+Push-Location $WindowsRoot
 try {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Output) | Out-Null
-    go test ./linux/... ./internal/... ./windows
+    go test ./...
     Assert-NativeCommand 'go test'
-    go build -trimpath -tags 'desktop,production' -ldflags '-s -w -H windowsgui' -o $Output ./windows
+    go build -trimpath -tags 'desktop,production' -ldflags '-s -w -H windowsgui' -o $Output .
     Assert-NativeCommand 'go build'
 }
 finally {

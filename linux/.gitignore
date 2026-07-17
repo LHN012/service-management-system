@@ -1,0 +1,11 @@
+# Runtime data
+/projects/
+/logs/
+/tmp-deploy-target-*/
+/tmp-zip-work-*/
+
+# Build outputs
+/bin/
+/sms
+/release/
+/.sms.lock
